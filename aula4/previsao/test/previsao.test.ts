@@ -7,7 +7,7 @@ jest.mock("../src/services/Cptec", () => {
     .mockImplementationOnce(() => {
       return {
         listaCidades: jest.fn().mockImplementation(() => {
-          return "<note><cidade>teste</cidade><from>Jani</from><heading>Reminder</heading><body>Don't forget me this weekend!</body></note>";
+          return "<note><cidade>teste</cidade><from>Jani</from><heading>Reminder</heading><body></body></note>";
         }),
       };
     })
