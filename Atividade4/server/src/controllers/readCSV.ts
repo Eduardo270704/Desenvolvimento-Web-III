@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import { Estacao } from "../types";
-import { connect, disconnect } from "../models/connection";
 import controller from "./EstacaoController";
+import { connect, disconnect } from "../models";
 
 // Pasta onde estão os arquivos CSV
 const pasta = "./dados";

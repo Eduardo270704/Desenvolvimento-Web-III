@@ -9,6 +9,7 @@ export interface Estacao {
   dataFundacao: Date | undefined;
   leituras: Leitura[];
 }
+
 export interface Leitura {
   datahora: Date | undefined;
   precipitacao: number | undefined;

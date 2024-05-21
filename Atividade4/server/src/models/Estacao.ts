@@ -1,5 +1,4 @@
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+import mongoose, { Schema } from "mongoose";
 
 const LeituraSchema = new Schema({
   datahora: Date,
@@ -22,6 +21,7 @@ const LeituraSchema = new Schema({
   ventoVelocidade: Number,
 });
 
+// define os schemas
 const EstacaoSchema = new Schema({
   regiao: String,
   uf: String,
@@ -33,7 +33,7 @@ const EstacaoSchema = new Schema({
   dataFundacao: Date,
   leituras: [LeituraSchema],
 });
-
+// mongoose.model compila o modelo
 const LeituraModel = mongoose.model("Leitura", LeituraSchema);
 const EstacaoModel = mongoose.model("Estacao", EstacaoSchema, "estacoes");
 export { LeituraModel, EstacaoModel };

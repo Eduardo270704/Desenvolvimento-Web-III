@@ -1,14 +1,43 @@
 import { Request, Response } from "express";
-import Category from "../models";
+import Category from "../models/Category";
 
 class CategoryController {
-  public async create(req: Request, res: Response): Promise<Response> {
+  public async create(req: Request, res: Response): Promise<void> {
     const { name } = req.body;
-    const response = await Category.create({ name });
-    return res.send(response);
+    try {
+      const response = await Category.create({ name });
+      res.send(response);
+    } catch (e: any) {
+      if (e.code === 11000) {
+        res.send({ message: `O nome ${name} já está em uso` });
+      } else if (e.errors?.name) {
+        res.send({ message: e.errors.name.message });
+      } else {
+        res.send({ message: e });
+      }
+    }
   }
-  catch(error: any) {
-    res.send{( message: error.message )};
+
+  public async list(_req: Request, res: Response): Promise<void> {
+    res.send(
+      await Category.find(
+        {},
+        {},
+        {
+          sort: { name: 1 },
+        }
+      )
+    );
+  }
+
+  public async delete(req: Request, res: Response): Promise<void> {
+    const { id } = req.body;
+    const response = await Category.findByIdAndDelete(id);
+    if (response) {
+      res.json(response);
+    } else {
+      res.json({ message: "Registro inexistente" });
+    }
   }
 }
 
