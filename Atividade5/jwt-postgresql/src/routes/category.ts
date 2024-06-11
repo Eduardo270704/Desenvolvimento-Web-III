@@ -1,11 +1,15 @@
-import { Router } from "express";
-import controller from "../controllers/CategoryController";
+import { Router, Request, Response } from "express";
+import { CategoryController } from "../controllers";
 
-const router = Router();
+const routes = Router();
 
-router.get("/", controller.list);
-router.post("/", controller.create);
-router.put("/", controller.update);
-router.delete("/", controller.delete);
+routes.get("/", CategoryController.list);
+routes.post("/", CategoryController.create);
+routes.put("/", CategoryController.update);
+routes.delete("/", CategoryController.delete);
 
-export default router;
+routes.use((_req: Request, res: Response) =>
+  res.json({ error: "Operação desconhecida com a categoria" })
+);
+
+export default routes;

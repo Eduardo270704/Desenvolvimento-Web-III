@@ -1,6 +1,11 @@
 import Category from "./Category";
 import Product from "./Product";
-import Spent from "./Spent";
+import Expense from "./Expense";
 import User from "./User";
 
-export { Category, Product, Spent, User };
+export {
+    Category,
+    Product,
+    Expense,
+    User
+}

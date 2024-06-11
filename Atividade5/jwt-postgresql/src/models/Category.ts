@@ -1,6 +1,7 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
+import { ICategory } from "../interfaces";
 
-const CategorySchema = new Schema(
+const CategorySchema: Schema<ICategory> = new Schema(
   {
     name: {
       type: String,
@@ -12,13 +13,19 @@ const CategorySchema = new Schema(
   },
   {
     toJSON: {
-      transform: function (doc, ret, options) {
+      transform: (doc: ICategory, ret: Partial<ICategory>) => {
         ret.id = ret._id;
         delete ret._id;
         delete ret.__v;
+        return ret;
       },
     },
   }
 );
 
-export default mongoose.model("Category", CategorySchema, "categories");
+const Category: Model<ICategory> = mongoose.model<ICategory>(
+  "Category",
+  CategorySchema,
+  "categories"
+);
+export default Category;
